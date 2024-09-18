@@ -1,0 +1,8 @@
+[
+	["menu_book", "Teacher", 4],
+	["school", "Parent", 2],
+	["edit", "Administrator", 3],
+	["login", "Admission", 4],
+	["person", "HR", 0],
+	["attach_money", "Accounts", 0]
+]

@@ -1,0 +1,29 @@
+[
+	[
+		"Administrator lesson title 1",
+		"lesson",
+		[
+			"Administrator step description 1.1",
+			"Administrator step description 1.2",
+			"Administrator step description 1.3"
+		]
+	],
+	[
+		"Administrator lesson title 2",
+		"lesson",
+		[
+			"Administrator step description 2.1",
+			"Administrator step description 2.2",
+			"Administrator step description 2.3"
+		]
+	],
+	[
+		"Administrator lesson title 3",
+		"lesson",
+		[
+			"Administrator step description 3.1",
+			"Administrator step description 3.2",
+			"Administrator step description 3.3"
+		]
+	]
+]

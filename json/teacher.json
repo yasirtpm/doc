@@ -1,0 +1,38 @@
+[
+	[
+		"Teacher lesson title 1",
+		"lesson",
+		[
+			"Teacher step description 1.1",
+			"Teacher step description 1.2",
+			"Teacher step description 1.3"
+		]
+	],
+	[
+		"Teacher lesson title 2",
+		"lesson",
+		[
+			"Teacher step description 2.1",
+			"Teacher step description 2.2",
+			"Teacher step description 2.3"
+		]
+	],
+	[
+		"Teacher lesson title 3",
+		"lesson",
+		[
+			"Teacher step description 3.1",
+			"Teacher step description 3.2",
+			"Teacher step description 3.3"
+		]
+	],
+	[
+		"Teacher lesson title 4",
+		"lesson",
+		[
+			"Teacher step description 4.1",
+			"Teacher step description 4.2",
+			"Teacher step description 4.3"
+		]
+	]
+]

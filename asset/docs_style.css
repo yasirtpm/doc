@@ -1,0 +1,248 @@
+/*docs_style*/
+
+/*reset*/
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+html {
+	font-size: 16px;
+}
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Poppins", sans-serif;
+	color: #666;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin: 0;
+	padding: 0;
+}
+ul, ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+li {
+	list-style: none;
+}
+a {
+	color: inherit;
+	text-decoration: none;
+	transition: all 0.5s;
+}
+
+/*aside*/
+aside {
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 2.5rem;
+	padding: 2.5rem 1.25rem;
+	width: 20%;
+	height: 100vh;
+	overflow: auto;
+	background-color: white;
+	box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+aside h1 {
+	font-size: 3rem;
+	line-height: 3rem;
+}
+aside h6 {
+	margin-inline-start: 0.125rem;
+	font-size: 0.9rem;
+	font-weight: 400;
+	line-height: 0.75rem;
+}
+aside p {
+	margin-top: auto;
+	font-size: 0.9rem;
+}
+aside li {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.5rem 1.25rem;
+	margin-bottom: 0.75rem;
+	background-color: white;
+	border-radius: 1rem;
+	box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+	transition: all 0.5s;
+}
+aside li:last-child {
+	margin-bottom: 0;
+}
+aside li i.material-symbols-outlined {
+    font-size: 1rem;
+}
+aside li:hover, aside li.active {
+	color: white;
+	background-color: #F97F51;
+}
+aside li:active {
+	color: inherit;
+	background-color: inherit;
+}
+
+/*main*/
+main {
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 2.5rem 5rem;
+	width: 80%;
+	height: 100vh;
+	overflow: auto;
+}
+
+/*nav*/
+nav {
+	z-index: 1;
+	position: sticky;
+	top: -2.5rem;
+	display: flex;
+	justify-content: space-between;
+	padding: 1.25rem;
+	margin-bottom: 2.5rem;
+	background-color: white;
+	border-top: 4px solid #F97F51;
+	border-radius: 1rem;
+	box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+nav li {
+	display: inline-block;
+	cursor: pointer;
+}
+nav li::after {
+	content: '\e5cc';
+	font-family: 'Material Symbols Outlined';
+    vertical-align: middle;
+    margin-inline: 0.25rem;
+}
+nav li:last-child::after {
+	display: none;
+}
+nav a::after {
+	content: '\e89e';
+	font-family: 'Material Symbols Outlined';
+    vertical-align: middle;
+    margin-inline-start: 0.25rem;
+}
+nav li:hover, nav a:hover {
+	color: #F97F51;
+}
+nav li:nth-child(3):hover {
+	color: inherit;
+	cursor: auto;
+}
+nav li:active, nav a:active {
+	color: inherit;
+}
+
+/*section*/
+section {
+	display: grid;
+	gap: 1.25rem;
+}
+section:has(article) {
+	grid-template-columns: repeat(2, 1fr);
+}
+section:has(figure) {
+	grid-template-columns: 1fr;
+}
+
+/*article*/
+article {
+	display: flex;
+	align-items: center;
+	gap: 1.25rem;
+	padding: 1.25rem;
+	background-color: white;
+	border-radius: 1rem;
+	box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+	transition: all 0.5s;
+}
+article i.material-symbols-outlined, article h1 {
+	flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.25rem;
+    color: white;
+    background-color: #F97F51;
+    border-radius: 1rem;
+    transition: all 0.5s;
+}
+article h5 {
+	font-weight: 400;
+}
+article:hover {
+	color: white;
+	background-color: #F97F51;
+}
+article:active {
+	color: inherit;
+	background-color: inherit;
+}
+article:hover i.material-symbols-outlined, article:hover h1 {
+	color: #F97F51;
+	background-color: white;
+}
+article:active i.material-symbols-outlined, article:active h1 {
+	color: white;
+	background-color: #F97F51;
+}
+
+/*figure*/
+figure {
+	padding: 1.25rem;
+	margin: 0;
+	background-color: white;
+	border-radius: 1rem;
+	box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+figure img {
+	display: block;
+	width: 100%;
+	border-radius: 1rem;
+}
+figure figcaption {
+	display: flex;
+	align-items: flex-start;
+	gap: 1.25rem;
+	margin-bottom: 1.25rem;
+}
+figure figcaption h1 {
+	flex-shrink: 0;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+    color: white;
+    background-color: #F97F51;
+    border-radius: 1rem;
+}
+figure video {
+	display: block;
+	width: 100%;
+	border-radius: 1rem;
+}
+
+/*header*/
+header {
+	display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}

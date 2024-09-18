@@ -1,0 +1,20 @@
+[
+	[
+		"Parent lesson title 1",
+		"lesson",
+		[
+			"Parent step description 1.1",
+			"Parent step description 1.2",
+			"Parent step description 1.3"
+		]
+	],
+	[
+		"Parent lesson title 2",
+		"lesson",
+		[
+			"Parent step description 2.1",
+			"Parent step description 2.2",
+			"Parent step description 2.3"
+		]
+	]
+]

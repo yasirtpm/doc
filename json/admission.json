@@ -1,0 +1,38 @@
+[
+	[
+		"Admission lesson title 1",
+		"lesson",
+		[
+			"Admission step description 1.1",
+			"Admission step description 1.2",
+			"Admission step description 1.3"
+		]
+	],
+	[
+		"Admission lesson title 2",
+		"lesson",
+		[
+			"Admission step description 2.1",
+			"Admission step description 2.2",
+			"Admission step description 2.3"
+		]
+	],
+	[
+		"Admission lesson title 3",
+		"lesson",
+		[
+			"Admission step description 3.1",
+			"Admission step description 3.2",
+			"Admission step description 3.3"
+		]
+	],
+	[
+		"Admission lesson title 4",
+		"lesson",
+		[
+			"Admission step description 4.1",
+			"Admission step description 4.2",
+			"Admission step description 4.3"
+		]
+	]
+]
