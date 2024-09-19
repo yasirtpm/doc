@@ -58,6 +58,7 @@ async function fetchIndex() {
 		});
 	} catch (error) {
 		console.error(error);
+		// errorHeader
 		content.innerHTML = '';
 		const header = document.createElement('header');
 		const p = document.createElement('p');
@@ -139,6 +140,7 @@ async function fetchSubject(fileName, currentAsideLi) {
 		});
 	} catch (error) {
 		console.error(error);
+		// errorHeader
 		content.innerHTML = '';
 		const header = document.createElement('header');
 		const p = document.createElement('p');
@@ -178,12 +180,28 @@ async function showLesson(fileName, data) {
 			cache: 'no-cache'
 		});
 
-		// header
-		const header = document.createElement('header');
-		const h3 = document.createElement('h3');
-		h3.textContent = data[0];
-		header.appendChild(h3);
-		content.appendChild(header);
+		// lessonHeader
+		(function () {
+			// icon
+			const icon = document.createElement('i');
+			icon.className = 'material-symbols-outlined';
+			icon.textContent = 'description';
+
+			// hgroup
+			const hgroup = document.createElement('hgroup');
+			const h3 = document.createElement('h3');
+			h3.textContent = data[0];
+			const h5 = document.createElement('h5');
+			h5.textContent = `${data[2].length} steps`;
+			hgroup.appendChild(h3);
+			hgroup.appendChild(h5);
+
+			// header
+			const header = document.createElement('header');
+			header.appendChild(icon);
+			header.appendChild(hgroup);
+			content.appendChild(header);
+		})();
 
 		if (response.ok) {
 			// video
@@ -220,6 +238,7 @@ async function showLesson(fileName, data) {
 		});
 	} catch (error) {
 		console.error(error);
+		// errorHeader
 		content.innerHTML = '';
 		const header = document.createElement('header');
 		const p = document.createElement('p');
