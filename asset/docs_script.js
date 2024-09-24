@@ -1,5 +1,7 @@
 /*docs_script*/
 
+let controller;
+
 // fetchIndex
 async function fetchIndex() {
 	// asideLi
@@ -23,9 +25,19 @@ async function fetchIndex() {
 	const content = document.getElementById('content');
 	content.innerHTML = '';
 
+	// AbortController
+	if (controller) {
+		controller.abort();
+	}
+	controller = new AbortController();
+	const signal = controller.signal;
+
 	try {
 		// fetch
-		const response = await fetch('json/index.json', { cache: 'no-cache' });
+		const response = await fetch('json/index.json', {
+			cache: 'no-cache',
+			signal
+		});
 		if (!response.ok) throw new Error(`${response.status}! ${response.statusText}`);
 
 		// populate content
@@ -59,7 +71,6 @@ async function fetchIndex() {
 	} catch (error) {
 		console.error(error);
 		// errorHeader
-		content.innerHTML = '';
 		const header = document.createElement('header');
 		const p = document.createElement('p');
 		if (error instanceof TypeError) {
@@ -106,9 +117,19 @@ async function fetchSubject(fileName, currentAsideLi) {
 	const content = document.getElementById('content');
 	content.innerHTML = '';
 
+	// AbortController
+	if (controller) {
+		controller.abort();
+	}
+	controller = new AbortController();
+	const signal = controller.signal;
+
 	try {
 		// fetch
-		const response = await fetch(`json/${fileName.toLowerCase()}.json`, { cache: 'no-cache' });
+		const response = await fetch(`json/${fileName.toLowerCase()}.json`, {
+			cache: 'no-cache',
+			signal
+		});
 		if (!response.ok) throw new Error(`${response.status}! ${response.statusText}`);
 
 		// populate content
@@ -141,7 +162,6 @@ async function fetchSubject(fileName, currentAsideLi) {
 	} catch (error) {
 		console.error(error);
 		// errorHeader
-		content.innerHTML = '';
 		const header = document.createElement('header');
 		const p = document.createElement('p');
 		if (error instanceof TypeError) {
@@ -172,12 +192,20 @@ async function showLesson(fileName, data) {
 	const content = document.getElementById('content');
 	content.innerHTML = '';
 
+	// AbortController
+	if (controller) {
+		controller.abort();
+	}
+	controller = new AbortController();
+	const signal = controller.signal;
+
 	try {
 		// fetch
 		const sourceSrc = `lesson/${fileName.toLowerCase()}/${data[1]}/${data[1]}.mp4`;
 		const response = await fetch(sourceSrc, {
 			method: 'HEAD',
-			cache: 'no-cache'
+			cache: 'no-cache',
+			signal
 		});
 
 		// lessonHeader
@@ -239,7 +267,6 @@ async function showLesson(fileName, data) {
 	} catch (error) {
 		console.error(error);
 		// errorHeader
-		content.innerHTML = '';
 		const header = document.createElement('header');
 		const p = document.createElement('p');
 		p.textContent = 'Error loading data. Try again.';
