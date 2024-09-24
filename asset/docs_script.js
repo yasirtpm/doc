@@ -71,15 +71,17 @@ async function fetchIndex() {
 	} catch (error) {
 		console.error(error);
 		// errorHeader
-		const header = document.createElement('header');
-		const p = document.createElement('p');
-		if (error instanceof TypeError) {
-			p.textContent = 'Error loading data. Try again.';
-		} else {
-			p.textContent = error.message;
+		if (error.name !== 'AbortError') {
+			const header = document.createElement('header');
+			const p = document.createElement('p');
+			if (error instanceof TypeError) {
+				p.textContent = 'Error loading data. Try again.';
+			} else {
+				p.textContent = error.message;
+			}
+			header.appendChild(p);
+			content.appendChild(header);
 		}
-		header.appendChild(p);
-		content.appendChild(header);
 	}
 }
 
@@ -162,15 +164,17 @@ async function fetchSubject(fileName, currentAsideLi) {
 	} catch (error) {
 		console.error(error);
 		// errorHeader
-		const header = document.createElement('header');
-		const p = document.createElement('p');
-		if (error instanceof TypeError) {
-			p.textContent = 'Error loading data. Try again.';
-		} else {
-			p.textContent = error.message;
+		if (error.name !== 'AbortError') {
+			const header = document.createElement('header');
+			const p = document.createElement('p');
+			if (error instanceof TypeError) {
+				p.textContent = 'Error loading data. Try again.';
+			} else {
+				p.textContent = error.message;
+			}
+			header.appendChild(p);
+			content.appendChild(header);
 		}
-		header.appendChild(p);
-		content.appendChild(header);
 	}
 }
 
@@ -267,10 +271,12 @@ async function showLesson(fileName, data) {
 	} catch (error) {
 		console.error(error);
 		// errorHeader
-		const header = document.createElement('header');
-		const p = document.createElement('p');
-		p.textContent = 'Error loading data. Try again.';
-		header.appendChild(p);
-		content.appendChild(header);
+		if (error.name !== 'AbortError') {
+			const header = document.createElement('header');
+			const p = document.createElement('p');
+			p.textContent = 'Error loading data. Try again.';
+			header.appendChild(p);
+			content.appendChild(header);
+		}
 	}
 }
