@@ -4,6 +4,13 @@ let controller;
 
 // fetchIndex
 async function fetchIndex() {
+	// AbortController
+	if (controller) {
+		controller.abort();
+	}
+	controller = new AbortController();
+	const signal = controller.signal;
+
 	// asideLi
 	const asideLi = document.querySelectorAll('aside ul li');
 	asideLi.forEach(item => {
@@ -24,13 +31,6 @@ async function fetchIndex() {
 	// empty content
 	const content = document.getElementById('content');
 	content.innerHTML = '';
-
-	// AbortController
-	if (controller) {
-		controller.abort();
-	}
-	controller = new AbortController();
-	const signal = controller.signal;
 
 	try {
 		// fetch
@@ -92,6 +92,13 @@ window.addEventListener('load', () => {
 
 // fetchSubject
 async function fetchSubject(fileName, currentAsideLi) {
+	// AbortController
+	if (controller) {
+		controller.abort();
+	}
+	controller = new AbortController();
+	const signal = controller.signal;
+
 	// asideLi
 	const asideLi = document.querySelectorAll('aside ul li');
 	asideLi.forEach(item => {
@@ -118,13 +125,6 @@ async function fetchSubject(fileName, currentAsideLi) {
 	// empty content
 	const content = document.getElementById('content');
 	content.innerHTML = '';
-
-	// AbortController
-	if (controller) {
-		controller.abort();
-	}
-	controller = new AbortController();
-	const signal = controller.signal;
 
 	try {
 		// fetch
@@ -180,6 +180,13 @@ async function fetchSubject(fileName, currentAsideLi) {
 
 // showLesson
 async function showLesson(fileName, data) {
+	// AbortController
+	if (controller) {
+		controller.abort();
+	}
+	controller = new AbortController();
+	const signal = controller.signal;
+	
 	// asideLi
 	const asideLi = document.querySelectorAll('aside ul li');
 	asideLi.forEach(item => {
@@ -195,13 +202,6 @@ async function showLesson(fileName, data) {
 	// empty content
 	const content = document.getElementById('content');
 	content.innerHTML = '';
-
-	// AbortController
-	if (controller) {
-		controller.abort();
-	}
-	controller = new AbortController();
-	const signal = controller.signal;
 
 	try {
 		// fetch
