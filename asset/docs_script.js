@@ -9,7 +9,6 @@ async function fetchIndex() {
 		controller.abort();
 	}
 	controller = new AbortController();
-	const signal = controller.signal;
 
 	// asideLi
 	const asideLi = document.querySelectorAll('aside ul li');
@@ -32,13 +31,21 @@ async function fetchIndex() {
 	const content = document.getElementById('content');
 	content.innerHTML = '';
 
+	// load header
+	const header = document.createElement('header');
+	header.textContent = 'Loading...';
+	content.appendChild(header);
+
 	try {
 		// fetch
 		const response = await fetch('json/index.json', {
 			cache: 'no-cache',
-			signal
+			signal: controller.signal
 		});
 		if (!response.ok) throw new Error(`${response.status}! ${response.statusText}`);
+
+		// remove load header
+		content.removeChild(header);
 
 		// populate content
 		const data = await response.json();
@@ -54,13 +61,11 @@ async function fetchIndex() {
 			h3.textContent = item[1];
 			const h5 = document.createElement('h5');
 			h5.textContent = `${item[2]} lesson`;
-			hgroup.appendChild(h3);
-			hgroup.appendChild(h5);
+			hgroup.append(h3, h5);
 
 			// article
 			const article = document.createElement('article');
-			article.appendChild(icon);
-			article.appendChild(hgroup);
+			article.append(icon, hgroup);
 			content.appendChild(article);
 
 			// call fetchSubject(): onclick subject
@@ -70,17 +75,13 @@ async function fetchIndex() {
 		});
 	} catch (error) {
 		console.error(error);
-		// errorHeader
+		// error header
 		if (error.name !== 'AbortError') {
-			const header = document.createElement('header');
-			const p = document.createElement('p');
 			if (error instanceof TypeError) {
-				p.textContent = 'Error loading data. Try again.';
+				header.textContent = 'Error loading data. Try again.';
 			} else {
-				p.textContent = error.message;
+				header.textContent = error.message;
 			}
-			header.appendChild(p);
-			content.appendChild(header);
 		}
 	}
 }
@@ -97,7 +98,6 @@ async function fetchSubject(fileName, currentAsideLi) {
 		controller.abort();
 	}
 	controller = new AbortController();
-	const signal = controller.signal;
 
 	// asideLi
 	const asideLi = document.querySelectorAll('aside ul li');
@@ -119,20 +119,27 @@ async function fetchSubject(fileName, currentAsideLi) {
 	navLiSubject.addEventListener('click', () => {
 		fetchSubject(fileName, currentAsideLi);
 	});
-	navUl.appendChild(navLiIndex);
-	navUl.appendChild(navLiSubject);
+	navUl.append(navLiIndex, navLiSubject);
 	
 	// empty content
 	const content = document.getElementById('content');
 	content.innerHTML = '';
 
+	// load header
+	const header = document.createElement('header');
+	header.textContent = 'Loading...';
+	content.appendChild(header);
+
 	try {
 		// fetch
 		const response = await fetch(`json/${fileName.toLowerCase()}.json`, {
 			cache: 'no-cache',
-			signal
+			signal: controller.signal
 		});
 		if (!response.ok) throw new Error(`${response.status}! ${response.statusText}`);
+
+		// remove load header
+		content.removeChild(header);
 
 		// populate content
 		const data = await response.json();
@@ -147,13 +154,11 @@ async function fetchSubject(fileName, currentAsideLi) {
 			h3.textContent = item[0];
 			const h5 = document.createElement('h5');
 			h5.textContent = `${item[2].length} steps`;
-			hgroup.appendChild(h3);
-			hgroup.appendChild(h5);
+			hgroup.append(h3, h5);
 
 			// article
 			const article = document.createElement('article');
-			article.appendChild(h1);
-			article.appendChild(hgroup);
+			article.append(h1, hgroup);
 			content.appendChild(article);
 
 			// call showLesson(): onclick lesson
@@ -163,17 +168,13 @@ async function fetchSubject(fileName, currentAsideLi) {
 		});
 	} catch (error) {
 		console.error(error);
-		// errorHeader
+		// error header
 		if (error.name !== 'AbortError') {
-			const header = document.createElement('header');
-			const p = document.createElement('p');
 			if (error instanceof TypeError) {
-				p.textContent = 'Error loading data. Try again.';
+				header.textContent = 'Error loading data. Try again.';
 			} else {
-				p.textContent = error.message;
+				header.textContent = error.message;
 			}
-			header.appendChild(p);
-			content.appendChild(header);
 		}
 	}
 }
@@ -185,7 +186,6 @@ async function showLesson(fileName, data) {
 		controller.abort();
 	}
 	controller = new AbortController();
-	const signal = controller.signal;
 	
 	// asideLi
 	const asideLi = document.querySelectorAll('aside ul li');
@@ -195,13 +195,18 @@ async function showLesson(fileName, data) {
 
 	// navLi
 	const navUl = document.getElementById('navigation');
-	const navLi = document.createElement('li');
-	navLi.textContent = data[0];
-	navUl.appendChild(navLi);
+	const navLiLesson = document.createElement('li');
+	navLiLesson.textContent = data[0];
+	navUl.appendChild(navLiLesson);
 
 	// empty content
 	const content = document.getElementById('content');
 	content.innerHTML = '';
+
+	// load header
+	const header = document.createElement('header');
+	header.textContent = 'Loading...';
+	content.appendChild(header);
 
 	try {
 		// fetch
@@ -209,10 +214,10 @@ async function showLesson(fileName, data) {
 		const response = await fetch(sourceSrc, {
 			method: 'HEAD',
 			cache: 'no-cache',
-			signal
+			signal: controller.signal
 		});
 
-		// lessonHeader
+		// lesson header
 		(function () {
 			// icon
 			const icon = document.createElement('i');
@@ -225,14 +230,11 @@ async function showLesson(fileName, data) {
 			h3.textContent = data[0];
 			const h5 = document.createElement('h5');
 			h5.textContent = `${data[2].length} steps`;
-			hgroup.appendChild(h3);
-			hgroup.appendChild(h5);
+			hgroup.append(h3, h5);
 
 			// header
-			const header = document.createElement('header');
-			header.appendChild(icon);
-			header.appendChild(hgroup);
-			content.appendChild(header);
+			header.textContent = '';
+			header.append(icon, hgroup);
 		})();
 
 		if (response.ok) {
@@ -255,8 +257,7 @@ async function showLesson(fileName, data) {
 			h1.textContent = index + 1;
 			const p = document.createElement('p');
 			p.textContent = item;
-			figcaption.appendChild(h1);
-			figcaption.appendChild(p);
+			figcaption.append(h1, p);
 
 			// img
 			const img = document.createElement('img');
@@ -264,19 +265,14 @@ async function showLesson(fileName, data) {
 
 			// figure
 			const figure = document.createElement('figure');
-			figure.appendChild(figcaption);
-			figure.appendChild(img);
+			figure.append(figcaption, img);
 			content.appendChild(figure);
 		});
 	} catch (error) {
 		console.error(error);
-		// errorHeader
+		// error header
 		if (error.name !== 'AbortError') {
-			const header = document.createElement('header');
-			const p = document.createElement('p');
-			p.textContent = 'Error loading data. Try again.';
-			header.appendChild(p);
-			content.appendChild(header);
+			header.textContent = 'Error loading data. Try again.';
 		}
 	}
 }
