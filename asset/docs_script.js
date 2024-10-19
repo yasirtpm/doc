@@ -1,12 +1,14 @@
 /*docs_script*/
 
 let controller;
+let timeoutId;
 
 // fetchIndex
 async function fetchIndex() {
 	// AbortController
 	if (controller) {
 		controller.abort();
+		clearTimeout(timeoutId);
 	}
 	controller = new AbortController();
 
@@ -45,7 +47,7 @@ async function fetchIndex() {
 		if (!response.ok) throw new Error(`${response.status}! ${response.statusText}`);
 		const data = await response.json();
 
-		setTimeout(() => {
+		timeoutId = setTimeout(() => {
 			// remove load header
 			content.removeChild(header);
 
@@ -76,7 +78,7 @@ async function fetchIndex() {
 			});
 		}, 500);
 	} catch (error) {
-		setTimeout(() => {
+		timeoutId = setTimeout(() => {
 			console.error(error);
 			// error header
 			if (error.name !== 'AbortError') {
@@ -100,6 +102,7 @@ async function fetchSubject(fileName, currentAsideLi) {
 	// AbortController
 	if (controller) {
 		controller.abort();
+		clearTimeout(timeoutId);
 	}
 	controller = new AbortController();
 
@@ -143,7 +146,7 @@ async function fetchSubject(fileName, currentAsideLi) {
 		if (!response.ok) throw new Error(`${response.status}! ${response.statusText}`);
 		const data = await response.json();
 
-		setTimeout(() => {
+		timeoutId = setTimeout(() => {
 			// remove load header
 			content.removeChild(header);
 
@@ -173,7 +176,7 @@ async function fetchSubject(fileName, currentAsideLi) {
 			});
 		}, 500);
 	} catch (error) {
-		setTimeout(() => {
+		timeoutId = setTimeout(() => {
 			console.error(error);
 			// error header
 			if (error.name !== 'AbortError') {
@@ -192,6 +195,7 @@ async function showLesson(fileName, data) {
 	// AbortController
 	if (controller) {
 		controller.abort();
+		clearTimeout(timeoutId);
 	}
 	controller = new AbortController();
 	
@@ -225,7 +229,7 @@ async function showLesson(fileName, data) {
 			signal: controller.signal
 		});
 
-		setTimeout(() => {
+		timeoutId = setTimeout(() => {
 			// lesson header
 			(function () {
 				// icon
@@ -279,7 +283,7 @@ async function showLesson(fileName, data) {
 			});
 		}, 500);
 	} catch (error) {
-		setTimeout(() => {
+		timeoutId = setTimeout(() => {
 			console.error(error);
 			// error header
 			if (error.name !== 'AbortError') {
