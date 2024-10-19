@@ -43,46 +43,50 @@ async function fetchIndex() {
 			signal: controller.signal
 		});
 		if (!response.ok) throw new Error(`${response.status}! ${response.statusText}`);
-
-		// remove load header
-		content.removeChild(header);
-
-		// populate content
 		const data = await response.json();
-		data.forEach((item, index) => {
-			// icon
-			const icon = document.createElement('i');
-			icon.className = 'material-symbols-outlined';
-			icon.textContent = item[0];
 
-			// hgroup
-			const hgroup = document.createElement('hgroup');
-			const h3 = document.createElement('h3');
-			h3.textContent = item[1];
-			const h5 = document.createElement('h5');
-			h5.textContent = `${item[2]} lesson`;
-			hgroup.append(h3, h5);
+		setTimeout(() => {
+			// remove load header
+			content.removeChild(header);
 
-			// article
-			const article = document.createElement('article');
-			article.append(icon, hgroup);
-			content.appendChild(article);
+			// populate content
+			data.forEach((item, index) => {
+				// icon
+				const icon = document.createElement('i');
+				icon.className = 'material-symbols-outlined';
+				icon.textContent = item[0];
 
-			// call fetchSubject(): onclick subject
-			article.addEventListener('click', () => {
-				fetchSubject(item[1], asideLi[index + 1]);
+				// hgroup
+				const hgroup = document.createElement('hgroup');
+				const h3 = document.createElement('h3');
+				h3.textContent = item[1];
+				const h5 = document.createElement('h5');
+				h5.textContent = `${item[2]} lesson`;
+				hgroup.append(h3, h5);
+
+				// article
+				const article = document.createElement('article');
+				article.append(icon, hgroup);
+				content.appendChild(article);
+
+				// call fetchSubject(): onclick subject
+				article.addEventListener('click', () => {
+					fetchSubject(item[1], asideLi[index + 1]);
+				});
 			});
-		});
+		}, 500);
 	} catch (error) {
-		console.error(error);
-		// error header
-		if (error.name !== 'AbortError') {
-			if (error instanceof TypeError) {
-				header.textContent = 'Error loading data. Try again.';
-			} else {
-				header.textContent = error.message;
+		setTimeout(() => {
+			console.error(error);
+			// error header
+			if (error.name !== 'AbortError') {
+				if (error instanceof TypeError) {
+					header.textContent = 'Error loading data. Try again.';
+				} else {
+					header.textContent = error.message;
+				}
 			}
-		}
+		}, 500);
 	}
 }
 
@@ -137,45 +141,49 @@ async function fetchSubject(fileName, currentAsideLi) {
 			signal: controller.signal
 		});
 		if (!response.ok) throw new Error(`${response.status}! ${response.statusText}`);
-
-		// remove load header
-		content.removeChild(header);
-
-		// populate content
 		const data = await response.json();
-		data.forEach((item, index) => {
-			// number
-			const h1 = document.createElement('h1');
-			h1.textContent = index + 1;
 
-			// hgroup
-			const hgroup = document.createElement('hgroup');
-			const h3 = document.createElement('h3');
-			h3.textContent = item[0];
-			const h5 = document.createElement('h5');
-			h5.textContent = `${item[2].length} steps`;
-			hgroup.append(h3, h5);
+		setTimeout(() => {
+			// remove load header
+			content.removeChild(header);
 
-			// article
-			const article = document.createElement('article');
-			article.append(h1, hgroup);
-			content.appendChild(article);
+			// populate content
+			data.forEach((item, index) => {
+				// number
+				const h1 = document.createElement('h1');
+				h1.textContent = index + 1;
 
-			// call showLesson(): onclick lesson
-			article.addEventListener('click', () => {
-				showLesson(fileName, item);
+				// hgroup
+				const hgroup = document.createElement('hgroup');
+				const h3 = document.createElement('h3');
+				h3.textContent = item[0];
+				const h5 = document.createElement('h5');
+				h5.textContent = `${item[2].length} steps`;
+				hgroup.append(h3, h5);
+
+				// article
+				const article = document.createElement('article');
+				article.append(h1, hgroup);
+				content.appendChild(article);
+
+				// call showLesson(): onclick lesson
+				article.addEventListener('click', () => {
+					showLesson(fileName, item);
+				});
 			});
-		});
+		}, 500);
 	} catch (error) {
-		console.error(error);
-		// error header
-		if (error.name !== 'AbortError') {
-			if (error instanceof TypeError) {
-				header.textContent = 'Error loading data. Try again.';
-			} else {
-				header.textContent = error.message;
+		setTimeout(() => {
+			console.error(error);
+			// error header
+			if (error.name !== 'AbortError') {
+				if (error instanceof TypeError) {
+					header.textContent = 'Error loading data. Try again.';
+				} else {
+					header.textContent = error.message;
+				}
 			}
-		}
+		}, 500);
 	}
 }
 
@@ -217,62 +225,66 @@ async function showLesson(fileName, data) {
 			signal: controller.signal
 		});
 
-		// lesson header
-		(function () {
-			// icon
-			const icon = document.createElement('i');
-			icon.className = 'material-symbols-outlined';
-			icon.textContent = 'description';
+		setTimeout(() => {
+			// lesson header
+			(function () {
+				// icon
+				const icon = document.createElement('i');
+				icon.className = 'material-symbols-outlined';
+				icon.textContent = 'description';
 
-			// hgroup
-			const hgroup = document.createElement('hgroup');
-			const h3 = document.createElement('h3');
-			h3.textContent = data[0];
-			const h5 = document.createElement('h5');
-			h5.textContent = `${data[2].length} steps`;
-			hgroup.append(h3, h5);
+				// hgroup
+				const hgroup = document.createElement('hgroup');
+				const h3 = document.createElement('h3');
+				h3.textContent = data[0];
+				const h5 = document.createElement('h5');
+				h5.textContent = `${data[2].length} steps`;
+				hgroup.append(h3, h5);
 
-			// header
-			header.textContent = '';
-			header.append(icon, hgroup);
-		})();
+				// header
+				header.textContent = '';
+				header.append(icon, hgroup);
+			})();
 
-		if (response.ok) {
-			// video
-			const figure = document.createElement('figure');
-			const video = document.createElement('video');
-			video.controls = true;
-			const source = document.createElement('source');
-			source.src = sourceSrc;
-			video.appendChild(source);
-			figure.appendChild(video);
-			content.appendChild(figure);
-		}
+			if (response.ok) {
+				// video
+				const figure = document.createElement('figure');
+				const video = document.createElement('video');
+				video.controls = true;
+				const source = document.createElement('source');
+				source.src = sourceSrc;
+				video.appendChild(source);
+				figure.appendChild(video);
+				content.appendChild(figure);
+			}
 
-		// populate content
-		data[2].forEach((item, index) => {
-			// figcaption
-			const figcaption = document.createElement('figcaption');
-			const h1 = document.createElement('h1');
-			h1.textContent = index + 1;
-			const p = document.createElement('p');
-			p.textContent = item;
-			figcaption.append(h1, p);
+			// populate content
+			data[2].forEach((item, index) => {
+				// figcaption
+				const figcaption = document.createElement('figcaption');
+				const h1 = document.createElement('h1');
+				h1.textContent = index + 1;
+				const p = document.createElement('p');
+				p.textContent = item;
+				figcaption.append(h1, p);
 
-			// img
-			const img = document.createElement('img');
-			img.src = `lesson/${fileName.toLowerCase()}/${data[1]}/${index + 1}.jpg`;
+				// img
+				const img = document.createElement('img');
+				img.src = `lesson/${fileName.toLowerCase()}/${data[1]}/${index + 1}.jpg`;
 
-			// figure
-			const figure = document.createElement('figure');
-			figure.append(figcaption, img);
-			content.appendChild(figure);
-		});
+				// figure
+				const figure = document.createElement('figure');
+				figure.append(figcaption, img);
+				content.appendChild(figure);
+			});
+		}, 500);
 	} catch (error) {
-		console.error(error);
-		// error header
-		if (error.name !== 'AbortError') {
-			header.textContent = 'Error loading data. Try again.';
-		}
+		setTimeout(() => {
+			console.error(error);
+			// error header
+			if (error.name !== 'AbortError') {
+				header.textContent = 'Error loading data. Try again.';
+			}
+		}, 500);
 	}
 }
