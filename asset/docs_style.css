@@ -262,3 +262,41 @@ header i.material-symbols-outlined {
 header h5 {
 	font-weight: 400;
 }
+
+/*loader*/
+section:has(div.sm) {
+	grid-template-columns: repeat(2, 1fr);
+}
+.section:has(div.lg) {
+	grid-template-columns: 1fr;
+}
+div.sm, div.lg {
+	position: relative;
+	min-height: 89px;
+	display: flex;
+    align-items: center;
+    padding: 1.25rem;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+div.loader::after {
+	content: '';
+	position: absolute;
+	left: 1.25rem;
+	top: 1.25rem;
+	right: 1.25rem;
+	bottom: 1.25rem;
+	background-color: #eee;
+	background: linear-gradient(90deg, rgba(245, 245, 245), rgba(205, 205, 205));
+	border-radius: 1rem;
+	animation: gradientShift 1s linear infinite;
+}
+@keyframes gradientShift {
+    0% {
+        background: linear-gradient(90deg, rgba(245, 245, 245), rgba(205, 205, 205));
+    }
+    100% {
+        background: linear-gradient(90deg, rgba(205, 205, 205), rgba(245, 245, 245));
+    }
+}

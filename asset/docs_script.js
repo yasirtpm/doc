@@ -33,10 +33,10 @@ async function fetchIndex() {
 	const content = document.getElementById('content');
 	content.innerHTML = '';
 
-	// load header
-	const header = document.createElement('header');
-	header.textContent = 'Loading...';
-	content.appendChild(header);
+	// loader
+	const div = document.createElement('div');
+	div.classList.add('loader', 'sm');
+	content.appendChild(div);
 
 	try {
 		// fetch
@@ -48,8 +48,8 @@ async function fetchIndex() {
 		const data = await response.json();
 
 		timeoutId = setTimeout(() => {
-			// remove load header
-			content.removeChild(header);
+			// remove loader
+			content.removeChild(div);
 
 			// populate content
 			data.forEach((item, index) => {
@@ -79,13 +79,16 @@ async function fetchIndex() {
 		}, 500);
 	} catch (error) {
 		timeoutId = setTimeout(() => {
+			// remove loader
+			div.classList.remove('loader');
+
+			// error
 			console.error(error);
-			// error header
 			if (error.name !== 'AbortError') {
 				if (error instanceof TypeError) {
-					header.textContent = 'Error loading data. Try again.';
+					div.textContent = 'Error loading data. Try again.';
 				} else {
-					header.textContent = error.message;
+					div.textContent = error.message;
 				}
 			}
 		}, 500);
@@ -132,10 +135,10 @@ async function fetchSubject(fileName, currentAsideLi) {
 	const content = document.getElementById('content');
 	content.innerHTML = '';
 
-	// load header
-	const header = document.createElement('header');
-	header.textContent = 'Loading...';
-	content.appendChild(header);
+	// loader
+	const div = document.createElement('div');
+	div.classList.add('loader', 'sm');
+	content.appendChild(div);
 
 	try {
 		// fetch
@@ -147,8 +150,8 @@ async function fetchSubject(fileName, currentAsideLi) {
 		const data = await response.json();
 
 		timeoutId = setTimeout(() => {
-			// remove load header
-			content.removeChild(header);
+			// remove loader
+			content.removeChild(div);
 
 			// populate content
 			data.forEach((item, index) => {
@@ -177,13 +180,16 @@ async function fetchSubject(fileName, currentAsideLi) {
 		}, 500);
 	} catch (error) {
 		timeoutId = setTimeout(() => {
+			// remove loader
+			div.classList.remove('loader');
+
+			// error
 			console.error(error);
-			// error header
 			if (error.name !== 'AbortError') {
 				if (error instanceof TypeError) {
-					header.textContent = 'Error loading data. Try again.';
+					div.textContent = 'Error loading data. Try again.';
 				} else {
-					header.textContent = error.message;
+					div.textContent = error.message;
 				}
 			}
 		}, 500);
@@ -215,10 +221,10 @@ async function showLesson(fileName, data) {
 	const content = document.getElementById('content');
 	content.innerHTML = '';
 
-	// load header
-	const header = document.createElement('header');
-	header.textContent = 'Loading...';
-	content.appendChild(header);
+	// loader
+	const div = document.createElement('div');
+	div.classList.add('loader', 'lg');
+	content.appendChild(div);
 
 	try {
 		// fetch
@@ -230,6 +236,9 @@ async function showLesson(fileName, data) {
 		});
 
 		timeoutId = setTimeout(() => {
+			// remove loader
+			content.removeChild(div);
+
 			// lesson header
 			(function () {
 				// icon
@@ -246,8 +255,9 @@ async function showLesson(fileName, data) {
 				hgroup.append(h3, h5);
 
 				// header
-				header.textContent = '';
+				const header = document.createElement('header');
 				header.append(icon, hgroup);
+				content.appendChild(header);
 			})();
 
 			if (response.ok) {
@@ -284,10 +294,13 @@ async function showLesson(fileName, data) {
 		}, 500);
 	} catch (error) {
 		timeoutId = setTimeout(() => {
+			// remove loader
+			div.classList.remove('loader');
+
+			// error
 			console.error(error);
-			// error header
 			if (error.name !== 'AbortError') {
-				header.textContent = 'Error loading data. Try again.';
+				div.textContent = 'Error loading data. Try again.';
 			}
 		}, 500);
 	}
